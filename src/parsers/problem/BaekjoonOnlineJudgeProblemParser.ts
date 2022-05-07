@@ -12,7 +12,8 @@ export class BaekjoonOnlineJudgeProblemParser extends Parser {
     const elem = htmlToElement(html);
     const task = new TaskBuilder('Baekjoon Online Judge').setUrl(url);
 
-    task.setName(elem.querySelector('#problem_title').textContent);
+    const name = url.substring(url.lastIndexOf('/') + 1, url.length);
+    task.setName(name);
 
     const constraintCells = elem.querySelectorAll('#problem-info > tbody > tr > td');
     task.setTimeLimit(parseFloat(/([0-9.]+) /.exec(constraintCells[0].textContent)[1]) * 1000);
